@@ -1,0 +1,7 @@
+FROM mariadb:latest
+
+ENV MYSQL_ROOT_PASSWORD root
+ENV MYSQL_DATABASE  docker
+ENV MYSQL_USER docker
+ENV MYSQL_PASSWORD docker
+
