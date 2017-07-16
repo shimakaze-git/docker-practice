@@ -7,23 +7,14 @@ services:
   wwwdata:
     image: busybox
     volumes:
-      - ./data/www:/usr/local/apache2/htdocs
-  apache:
-    build:  ./apache
+      - ./data/www:/var/www/html
+  php-apache:
+    build:  ./php-apache
     ports:
       - '80:80'
-    links:
-      - 'php7'
     volumes:
-      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
-    volumes_from:
-      - wwwdata
-  php7:
-    build:  ./php7
-    links:
-      - mariadb
-    volumes:
-      - ./php7/php.ini:/usr/local/etc/php/php.ini
+      - ./php-apache/apache2.conf:/etc/apache2/apache2.conf
+      - ./php-apache/php.ini:/usr/local/etc/php/php.ini
     volumes_from:
       - wwwdata
     depends_on:
